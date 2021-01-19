@@ -30,6 +30,33 @@ module Enumerable
     end
     return true
   end
+  #my_any
+  def my_any
+    self.my_each do |elem|
+      if yield elem
+        return true
+      end
+    end
+    return false
+  end
+  #my_one
+  def my_one
+    self.my_each do |elem|
+      if yield elem
+        return true
+      end
+    end
+    return false
+  end
+  #my_none
+  def my_none
+    self.my_each do |elem|
+      if yield elem
+        return false
+      end
+    end
+    return true
+  end
 end
 
 a = [1,2,3,4,5]
