@@ -21,6 +21,15 @@ module Enumerable
     end
     p result
   end
+  #my_all
+  def my_all
+    self.my_each do |elem|
+      unless yield elem
+        return false
+      end
+    end
+    return true
+  end
 end
 
 a = [1,2,3,4,5]
