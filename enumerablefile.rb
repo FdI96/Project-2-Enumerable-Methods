@@ -6,7 +6,7 @@ module Enumerable
     end
   end
   
-  #my_each_with_index
+  # my_each_with_index
 
   def my_each_with_index
     self.length.times do |i|
@@ -14,7 +14,7 @@ module Enumerable
     end
   end
 
-  #my_select
+  # my_select
 
   def my_select
     result = []
@@ -26,7 +26,7 @@ module Enumerable
     p result
   end
 
-  #my_all
+  # my_all
 
   def my_all
     self.my_each do |elem|
@@ -37,7 +37,7 @@ module Enumerable
     return true
   end
 
-  #my_any
+  # my_any
 
   def my_any
     self.my_each do |elem|
@@ -48,7 +48,7 @@ module Enumerable
     return false
   end
 
-  #my_one
+  # my_one
 
   def my_one
     self.my_each do |elem|
@@ -59,7 +59,7 @@ module Enumerable
     return false
   end
 
-  #my_none
+  # my_none
 
   def my_none
     self.my_each do |elem|
@@ -70,7 +70,7 @@ module Enumerable
     return true
   end
 
-  #my_count
+  # my_count
 
   def my_count(search = nil)
     if search == nil
@@ -86,7 +86,7 @@ module Enumerable
     end
   end
 
-  #my_map
+  # my_map
 
   def my_map
     result = []
@@ -96,7 +96,7 @@ module Enumerable
     return result
   end
 
-  #my_inject or reduce
+  # my_inject or reduce
 
   def my_inject(acc = 0)
     self.my_each do |elem|
@@ -105,7 +105,7 @@ module Enumerable
     return acc
   end
 
-  #multiply_els
+  # multiply_els
 
   def multiply_els
     self.my_inject(1) { |acc, elem| acc * elem }
