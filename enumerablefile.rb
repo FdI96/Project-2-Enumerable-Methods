@@ -57,6 +57,39 @@ module Enumerable
     end
     return true
   end
+  #my_count
+  def my_count(search = nil)
+    if search == nil
+      return self.length
+    else
+      count = 0
+      self.my_each do |elem|
+        if search == elem
+          count += 1
+        end
+      end
+      return count 
+    end
+  end
+  #my_map
+  def my_map
+    result = []
+    self.my_each do |elem|
+      result.push(yield elem)
+    end
+    return result
+  end
+  #my_inject or reduce
+  def my_inject(acc = 0)
+    self.my_each do |elem|
+      acc = yield elem, acc
+    end
+    return acc
+  end
+  #multiply_els
+  def multiply_els
+    self.my_inject(1) {|acc, elem| acc * elem}
+  end
 end
 
 a = [1,2,3,4,5]
