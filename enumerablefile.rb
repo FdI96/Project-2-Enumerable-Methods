@@ -91,6 +91,3 @@ module Enumerable
     self.my_inject(1) {|acc, elem| acc * elem}
   end
 end
-
-a = [1,2,3,4,5]
-a.my_select {|elem| elem > 2}
