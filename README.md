@@ -9,10 +9,15 @@ In this project, I'm cloning methods from the Enumerable module in Ruby. Basical
 # Prerequisites :
 
 1- A Computer.
+2- Ruby 2.7.0
 
 ## BUILT WITH
 
     -RUBY
+
+## LIVE DEMO
+
+You may take a look with some test in this [Live demo](https://repl.it/@FdI96/BewitchedTurbulentMuse#main.rb) link
 
 ## AUTHOR
 

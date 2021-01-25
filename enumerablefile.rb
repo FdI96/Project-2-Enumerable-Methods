@@ -1,34 +1,44 @@
 # Methods
 module Enumerable
   def my_each
-    self.length.times do |i|
-      yield self[i]
+    return to_enum(:my_each) unless block_given?
+
+    for elem in self
+      yield elem      
     end
   end
   
-  # my_each_with_index
+   # my_each_with_index
 
   def my_each_with_index
-    self.length.times do |i|
-      yield self[i], i
+    return to_enum(:my_each_with_index) unless block_given?
+    index = 0
+    for elem in self
+      yield elem, index
+      index += 1      
     end
+
+    return self
   end
 
   # my_select
 
   def my_select
+    return to_enum(:my_select) unless block_given?
+    
     result = []
     self.my_each do |elem|
       if yield elem
-        result.push << elem
+        result << elem
       end
     end
-    p result
+    
+    return result
   end
 
   # my_all
 
-  def my_all
+  def my_all?
     self.my_each do |elem|
       unless yield elem
         return false
@@ -39,7 +49,7 @@ module Enumerable
 
   # my_any
 
-  def my_any
+  def my_any?
     self.my_each do |elem|
       if yield elem
         return true
@@ -48,28 +58,23 @@ module Enumerable
     return false
   end
 
-  # my_one
+ # my_none
 
-  def my_one
-    self.my_each do |elem|
-      if yield elem
-        return true
-      end
-    end
-    return false
-  end
-
-  # my_none
-
-  def my_none
-    self.my_each do |elem|
-      if yield elem
-        return false
-      end
+  def my_none?
+    for elem in self
+      if block_given?
+        if yield elem 
+          return false
+        end
+      else
+        if elem == true
+          return false
+        end
+      end      
     end
     return true
   end
-
+  
   # my_count
 
   def my_count(search = nil)
@@ -88,13 +93,15 @@ module Enumerable
 
   # my_map
 
-  def my_map
+  def my_map(proc = nil)
     result = []
     self.my_each do |elem|
       result.push(yield elem)
+            
     end
     return result
   end
+
 
   # my_inject or reduce
 
