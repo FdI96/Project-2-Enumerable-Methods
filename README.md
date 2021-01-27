@@ -60,4 +60,4 @@ Thanks to The Odin Project. Is the webpage where I learned most of the topics in
 
 ## 📝 Licensed MIT
 
-This project is [MIT](https://github.com/FdI96/Project-2-Enumerable-Methods/blob/Development/LICENSE) licensed.
+This project is [MIT](https://github.com/FdI96/Project-2-Enumerable-Methods/blob/Features/LICENSE) licensed.
