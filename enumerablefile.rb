@@ -1,3 +1,4 @@
+
 # Methods
 module Enumerable
   def my_each
@@ -148,3 +149,4 @@ end
 def multiply_els(array = [])
   self.my_inject(1) { |acc, elem| acc * elem }
 end
+
