@@ -4,12 +4,27 @@
 
 # Getting started :
 
-In this project, I'm cloning methods from the Enumerable module in Ruby. Basically I created most of the methods that Enumerable module contain, I spend a lot time taking a look at the methods and trying to understand them, so then I went full on try to replicate them as much as I could. In first instance I created the "my_each" method which I used it then in the process to create other methods. In this project I've cut a little bit more the gap between ruby and me, creating theese methods. I totally took advantage from the yield statement which is the connection between a method and a piece of code (block)
+In this project, I'm cloning methods from the Enumerable module in Ruby. Basically I created most of the methods that Enumerable module contain.
+Methods: #my_each, #my_each_with_index, #my_select, #my_all?, #my_any?, #my_none, #my_count, #my_map, #my_inject and #multiply_els.
 
 # Prerequisites :
 
 1- A Computer.
-2- Ruby 2.7.0
+2- Ruby installed
+
+# Setup :
+
+Please install ruby, you may follow this guide from Odin Project webpage [here](https://www.theodinproject.com/courses/ruby-programming/lessons/installing-ruby-ruby-programming).
+
+# Install :
+
+Clone this [repository](https://github.com/FdI96/Project-2-Enumerable-Methods/tree/Features) from GitHub.
+
+# Usage:
+
+Change the directory with "cd" command to the directory cloned in your terminal.
+Type "ruby enumerablefile.rb" (Without the quotation marks).
+Finally you may add to your library of methods and you can use it with any array.
 
 ## BUILT WITH
 
@@ -45,4 +60,4 @@ Thanks to The Odin Project. Is the webpage where I learned most of the topics in
 
 ## 📝 Licensed MIT
 
-This project is ![MIT](https://github.com/FdI96/Project-2-Enumerable-Methods/blob/Development/LICENSE) licensed.
+This project is [MIT](https://github.com/FdI96/Project-2-Enumerable-Methods/blob/Development/LICENSE) licensed.

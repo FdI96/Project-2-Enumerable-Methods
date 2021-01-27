@@ -91,30 +91,60 @@ module Enumerable
     end
   end
 
-  # my_map
+ # my_map
 
   def my_map(proc = nil)
     result = []
-    self.my_each do |elem|
-      result.push(yield elem)
-            
+    self.my_each do |elem|      
+      result.push(proc.call(elem)) if proc.is_a?(Proc)
+      result.push(yield elem) if block_given? && proc.nil?           
     end
-    return result
+    result
   end
 
 
   # my_inject or reduce
 
-  def my_inject(acc = 0)
-    self.my_each do |elem|
-      acc = yield elem, acc
+  def my_inject(acc = nil, sym = nil)
+    
+    if !block_given? and sym.nil? and acc.nil?
+      p 'Error!'
     end
-    return acc
+      
+    if block_given?
+      r = acc unless acc.nil? 
+      self.my_each do |elem|     
+        if r.nil?          
+          r = elem          
+        else
+          r = yield r, elem
+        end
+      end
+      return r
+    elsif acc.is_a?(Symbol)
+      self.my_each do |elem|
+        if r.nil?
+          r = elem
+        else
+          r = r.public_send(acc, elem)
+        end
+      end
+    elsif acc.is_a?(Numeric) and sym.is_a?(Symbol)
+      r = acc
+      self.my_each do |elem|
+        r = r.public_send(sym, elem)
+      end
+    else
+      self.my_each do |elem|
+        yield elem
+      end
+    end
+    return r
   end
+end
 
-  # multiply_els
+# multiply_els
 
-  def multiply_els
-    self.my_inject(1) { |acc, elem| acc * elem }
-  end
+def multiply_els(array = [])
+  self.my_inject(1) { |acc, elem| acc * elem }
 end
