@@ -37,36 +37,80 @@ module Enumerable
     return result
   end
 
-  # my_all
+ # my_all
 
-  def my_all?
-    self.my_each do |elem|
-      unless yield elem
-        return false
-      end
+  def my_all?(regex = nil)
+    if !block_given? and regex == nil and self == nil
+      p 'Error'
     end
-    return true
+    if regex.is_a?(Regexp) || regex.is_a?(Class)
+      self.my_each do |elem|
+        unless regex == elem || elem.is_a?(Numeric)
+          return false
+        end
+      end
+      return true
+    elsif regex == nil and !block_given?
+      self.my_each do |elem|
+        unless elem == false || elem == nil
+          return false
+        end
+      end
+      return true
+    else
+      
+      self.my_each do |elem| #block case
+        unless yield elem
+          return false
+        end
+      end
+      return true  
+    end
+  
   end
 
   # my_any
 
-  def my_any?
-    self.my_each do |elem|
-      if yield elem
-        return true
-      end
+  def my_any?(regex = nil)
+    if !block_given? and regex == nil and self == nil
+      p 'Error'
     end
-    return false
+    if regex.is_a?(Regexp) || regex.is_a?(Class)
+      self.my_each do |elem|
+        unless elem
+          return true
+        end
+      end
+      return false
+    elsif regex == nil and !block_given?
+      self.my_each do |elem|
+        if elem != nil || elem == false
+          return true
+        end
+      end
+      return false
+    else
+      self.my_each do |elem|
+        if yield elem
+          return true
+        end
+      end
+      return false
+    end
   end
 
- # my_none
+  # my_none
 
-  def my_none?
+  def my_none?(arg = nil)
     for elem in self
       if block_given?
         if yield elem 
           return false
         end
+      elsif arg.is_a?(Regexp) || arg.is_a?(Class)      
+        if elem.is_a?(Regexp) || elem.is_a?(Float)
+          return false
+        end 
       else
         if elem == true
           return false
@@ -79,17 +123,23 @@ module Enumerable
   # my_count
 
   def my_count(search = nil)
-    if search == nil
+    count = 0
+    if search == nil and !block_given?
       return self.length
-    else
-      count = 0
+    elsif block_given?      
       self.my_each do |elem|
+        if yield elem
+          count += 1
+        end
+      end
+    else     
+      self.my_each do |elem|        
         if search == elem
           count += 1
         end
       end
-      return count 
     end
+    return count
   end
 
  # my_map
@@ -147,6 +197,6 @@ end
 # multiply_els
 
 def multiply_els(array = [])
-  self.my_inject(1) { |acc, elem| acc * elem }
+  array.my_inject(1) { |acc, elem| acc * elem }
 end
 
