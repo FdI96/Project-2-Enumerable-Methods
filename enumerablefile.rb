@@ -37,85 +37,125 @@ module Enumerable
     return result
   end
 
- # my_all
+  # my_all
 
-  def my_all?(regex = nil)
-    if !block_given? and regex == nil and self == nil
+  def my_all?(arg = nil)
+    if !block_given? and arg == nil and self == nil
       p 'Error'
     end
-    if regex.is_a?(Regexp) || regex.is_a?(Class)
+
+    if block_given?
       self.my_each do |elem|
-        unless regex == elem || elem.is_a?(Numeric)
-          return false
-        end
-      end
-      return true
-    elsif regex == nil and !block_given?
-      self.my_each do |elem|
-        unless elem == false || elem == nil
-          return false
-        end
-      end
-      return true
-    else
-      
-      self.my_each do |elem| #block case
         unless yield elem
           return false
         end
       end
-      return true  
+    elsif arg.is_a?(Class) && arg.class != Regexp
+      self.my_each do |elem|
+        unless elem.is_a?(arg)
+          return false
+        end
+      end
+    elsif arg.is_a?(Regexp)
+      self.my_each do |elem|
+        unless elem.match(arg)
+          return false
+        end
+      end
+    elsif arg.nil?
+      self.my_each do |elem|
+        if elem.nil? || elem == false
+          return false
+        end
+      end
+    else
+      self.my_each do |elem|
+        unless elem == arg
+          return false
+        end
+      end
     end
-  
+    return true
+    
   end
 
   # my_any
 
-  def my_any?(regex = nil)
-    if !block_given? and regex == nil and self == nil
+  def my_any?(arg = nil)
+    if !block_given? and arg == nil and self == nil
       p 'Error'
     end
-    if regex.is_a?(Regexp) || regex.is_a?(Class)
-      self.my_each do |elem|
-        unless elem
-          return true
-        end
-      end
-      return false
-    elsif regex == nil and !block_given?
-      self.my_each do |elem|
-        if elem != nil || elem == false
-          return true
-        end
-      end
-      return false
-    else
+   if block_given?
       self.my_each do |elem|
         if yield elem
           return true
         end
       end
-      return false
+    elsif arg.is_a?(Class) && arg.class != Regexp
+      self.my_each do |elem|
+        if elem.is_a?(arg)
+          return true
+        end
+      end
+    elsif arg.is_a?(Regexp)
+      self.my_each do |elem|
+        if elem.match(arg)
+          return true
+        end
+      end
+    elsif arg.nil?
+      self.my_each do |elem|
+        unless elem.nil? || elem == false
+          return true
+        end
+      end
+    else
+      self.my_each do |elem|
+        if elem == arg
+          return true
+        end
+      end
     end
+    return false
+    
   end
 
   # my_none
 
   def my_none?(arg = nil)
-    for elem in self
-      if block_given?
-        if yield elem 
+     if !block_given? and arg == nil and self == nil
+      p 'Error'
+    end
+   if block_given?
+      self.my_each do |elem|
+        if yield elem
           return false
         end
-      elsif arg.is_a?(Regexp) || arg.is_a?(Class)      
-        if elem.is_a?(Regexp) || elem.is_a?(Float)
-          return false
-        end 
-      else
-        if elem == true
+      end
+    elsif arg.is_a?(Class) && arg.class != Regexp
+      self.my_each do |elem|
+        if elem.is_a?(arg)
           return false
         end
-      end      
+      end
+    elsif arg.is_a?(Regexp)
+      self.my_each do |elem|
+        if elem.match(arg)
+          return false
+        end
+      end
+    elsif arg.nil?
+      self.my_each do |elem|
+        if elem
+          return false
+        end
+      end
+    else
+      self.my_each do |elem|
+        if elem == arg
+          return false
+        end
+      end
     end
     return true
   end
@@ -145,6 +185,7 @@ module Enumerable
  # my_map
 
   def my_map(proc = nil)
+    return to_enum(:my_map) unless block_given?
     result = []
     self.my_each do |elem|      
       result.push(proc.call(elem)) if proc.is_a?(Proc)
