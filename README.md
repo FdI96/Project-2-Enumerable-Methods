@@ -20,11 +20,11 @@ Please install ruby, you may follow this guide from Odin Project webpage [here](
 
 Clone this [repository](https://github.com/FdI96/Project-2-Enumerable-Methods/tree/Features) from GitHub.
 
-# Usage:
+## Usage:
 
-Change the directory with "cd" command to the directory cloned in your terminal.
-Type "ruby enumerablefile.rb" (Without the quotation marks).
-Finally you may add to your library of methods and you can use it with any array.
+    -Change the directory with "cd" command to the directory cloned in your terminal.
+    -Type "ruby enumerablefile.rb" (Without the quotation marks).
+    -Finally you may add to your library of methods and you can use it with any array.
 
 ## BUILT WITH
 
@@ -60,4 +60,4 @@ Thanks to The Odin Project. Is the webpage where I learned most of the topics in
 
 ## 📝 Licensed MIT
 
-This project is [MIT](https://github.com/FdI96/Project-2-Enumerable-Methods/blob/Development/LICENSE) licensed.
+This project is [MIT](https://github.com/FdI96/Project-2-Enumerable-Methods/blob/Features/LICENSE) licensed.
