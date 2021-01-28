@@ -165,6 +165,10 @@ module Enumerable
   def my_count(search = nil)
     count = 0
     if search == nil and !block_given?
+      if self.is_a?(Range)
+        range_array = self.to_a
+        return range_array.length
+      end
       return self.length
     elsif block_given?      
       self.my_each do |elem|
